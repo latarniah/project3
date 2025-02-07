@@ -22,21 +22,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
     <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/login.css">
 </head>
-<header>
-    <h1>Sophie Bluel <span>Interior Designer</span></h1>
-    <nav>
-        <ul class="navlink">
-            <li>projects</li>
-            <li>contact</li>
-            <li><a href="login.html">login</a></li>
-            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-        </ul>
-    </nav>
-</header>
 
 <body>
+    <header>
+        <h1>Sophie Bluel <span>Interior Designer</span></h1>
+        <nav>
+            <ul class="navlink">
+                <li>projects</li>
+                <li>contact</li>
+                <li><a href="login.html">login</a></li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            </ul>
+        </nav>
+    </header>
+
+
     <div class="center">
         <h1 class="login"> Login</h1>
         <form method="post">
@@ -47,23 +49,27 @@
             </div>
 
             <div class="txt_field">
-                <input type="" required>
+                <input type="password" required>
                 <span> </span>
                 <label> Password </label>
             </div>
-                   <input type="submit" value="Sign in">
+            <input type="submit" value="Sign in">
             <div class="users_signup">
-                <!-- Don't have an account? <a href="#">SignUp</a> -->
+
             </div>
             <div class="forgot"> Forgot your password? </div>
-            <script src="./js/login.js" type="module" defer></script>
         </form>
+        <!-- <footer>
+            <div class="footer">Legal Notice</div>
+        </footer> -->
     </div>
-    <script src="./js/script.js" type="module" defer></script>
+    <footer>
+        <div class="footer">Legal Notice</div>
+    </footer>
+
+
+    <script src="./js/login.js" defer></script>
+
 </body>
 
-</html>
-<footer>
-<div class="footer">Legal Notice<div>
-</footer>
 </html>
