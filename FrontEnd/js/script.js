@@ -1,138 +1,10 @@
 
-
-// let apiRequest = new XMLHttpRequest();
-// apiRequest.open('GET', 'http://localhost:5678/api/works'); apiRequest.send();
-
-// let jobCache =  [
-//     {
-//         "id": 1,
-//         "title": "Tahina lampshade",
-//         "imageUrl": "http://localhost:5678/images/abajour-tahina1651286843956.png",
-//         "categoryId": 1,
-//         "userId": 1,
-//         "category": {
-//             "id": 1,
-//             "name": "Objects"
-//         }
-//     },
-//     {
-//         "id": 2,
-//         "title": "Apartment Paris V",
-//         "imageUrl": "http://localhost:5678/images/appartement-paris-v1651287270508.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 3,
-//         "title": "Restaurant Sushisen - London",
-//         "imageUrl": "http://localhost:5678/images/restaurant-sushisen-londres1651287319271.png",
-//         "categoryId": 3,
-//         "userId": 1,
-//         "category": {
-//             "id": 3,
-//             "name": "Hotels & restaurants"
-//         }
-//     },
-//     {
-//         "id": 4,
-//         "title": "Villa “La Balisiere” - Port Louis",
-//         "imageUrl": "http://localhost:5678/images/la-balisiere1651287350102.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 5,
-//         "title": "Thermopolis Structures",
-//         "imageUrl": "http://localhost:5678/images/structures-thermopolis1651287380258.png",
-//         "categoryId": 1,
-//         "userId": 1,
-//         "category": {
-//             "id": 1,
-//             "name": "Objects"
-//         }
-//     },
-//     {
-//         "id": 6,
-//         "title": "Apartment Paris X",
-//         "imageUrl": "http://localhost:5678/images/appartement-paris-x1651287435459.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 7,
-//         "title": "Pavillon “Le coteau” - Cassis",
-//         "imageUrl": "http://localhost:5678/images/le-coteau-cassis1651287469876.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 8,
-//         "title": "Villa Ferneze - Isola d’Elba",
-//         "imageUrl": "http://localhost:5678/images/villa-ferneze1651287511604.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 9,
-//         "title": "Apartment Paris XVIII",
-//         "imageUrl": "http://localhost:5678/images/appartement-paris-xviii1651287541053.png",
-//         "categoryId": 2,
-//         "userId": 1,
-//         "category": {
-//             "id": 2,
-//             "name": "Apartments"
-//         }
-//     },
-//     {
-//         "id": 10,
-//         "title": "Bar “Lullaby” - Paris",
-//         "imageUrl": "http://localhost:5678/images/bar-lullaby-paris1651287567130.png",
-//         "categoryId": 3,
-//         "userId": 1,
-//         "category": {
-//             "id": 3,
-//             "name": "Hotels & restaurants"
-//         }
-//     },
-//     {
-//         "id": 11,
-//         "title": "Hotel First Arte - New Delhi",
-//         "imageUrl": "http://localhost:5678/images/hotel-first-arte-new-delhi1651287605585.png",
-//         "categoryId": 3,
-//         "userId": 1,
-//         "category": {
-//             "id": 3,
-//             "name": "Hotels & restaurants"
-//         }
-//     }
-
-// ];
 let jobCache;
 function filterButtons(job) {
     return job.category.name === 'Objects';
 }
 
-fetch('http://localhost:5678/api/works') 
+fetch('http://localhost:5678/api/works')
     .then(data => {
         return data.json();
     })
@@ -203,9 +75,175 @@ function insertFilterButtons(categories) {
             insertJobs(filteredJobs)
 
 
-            });
+        });
 
-        }
+    }
 }
 
+// const modal = document.querySelector(".modal");
+// const overlay = document.querySelector(".overlay");
+// const openModalBtn = document.querySelector(".btn-edit");
+// const closeModalBtn = document.querySelector(".btn-close");
+// const images = document.querySelectorAll(".modal_gallery");
+// const modalContent = document.getElementById('myModalContent');
 
+
+// images.forEach(img => {
+//     img.addEventListener("click", () => {
+//         modal.classList.remove("hidden");
+//         modalImg.src = img.src;
+//     });
+// });
+
+
+// const openModal = function () {
+//     // console.log("lala")\\
+//     modal.classList.remove("hidden");
+//     overlay.classList.remove("hidden");
+//     //TODO inerate job cache and instert each job into modal
+//     modal.innerHTML = ''
+//   let modalContent = '';
+//   jobCache.forEach(job => {
+//     modalContent += `
+//     <section class="modal hidden">
+// 			<button class="btn-close">⨉</button>
+// 			<h1 class="modal-txt">Photo Gallery</h1>
+// 			<div class="flex"></div>
+// 				<div class="modal-gallery"></div>
+      
+//          `;
+
+//             modalContent.innerHTML = newHTML;       
+
+//   });
+//   modal.innerHTML = modalContent;
+// };
+
+// openModalBtn.addEventListener("click", openModal);
+
+// openModalBtn.addEventListener("click", openModal);
+
+// const closeModal = function () {
+//     modal.classList.add("hidden");
+//     overlay.classList.add("hidden");
+// };
+// closeModalBtn.addEventListener("click", closeModal);
+// overlay.addEventListener("click", closeModal);
+// document.addEventListener("keydown");
+
+// document.addEventListener("keydown", function (e) {
+//     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+//         modalClose();
+//     }
+// });
+
+
+
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".btn-edit");
+const closeModalBtn = document.querySelector(".btn-close");
+
+const modalImg = document.querySelector(".modal img");  
+const images = document.querySelectorAll(".modal_gallery");
+
+const myModalContent = document.getElementById('myModalContent');
+
+
+images.forEach(img => {
+    img.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+     
+        if(modalImg) {
+            modalImg.src = img.src;
+        }
+    });
+});
+
+
+const openModal = function () {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+
+    
+    myModalContent.innerHTML = '';
+
+   
+    let newHTML = '';
+    jobCache.forEach(job => {
+       
+        newHTML += `
+            <figure>
+                <img src="${job.imageUrl}" alt="${job.title}">
+                <figcaption>${job.title}</figcaption>
+            </figure>
+        `;
+    });
+
+  
+    myModalContent.innerHTML = newHTML;
+};
+
+openModalBtn.addEventListener("click", openModal);
+
+
+const closeModal = function () {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+};
+
+closeModalBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+    }
+});
+
+
+// Select the button element
+const addAphotoButton = document.getElementById('addAphoto');
+
+// Define the new work object
+const newWork = {
+    title: 'New Work Title',
+    description: 'Description of the new work',
+    // Add other properties as required by your API
+};
+
+// Add an event listener to the button
+addAphotoButton.addEventListener('click', function() {
+    createWork(newWork);
+});
+
+// Define the createWork function
+async function createWork(workData) {
+    const url = 'http://localhost:5678/api/works';
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include the Authorization header if required
+                // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+            },
+            body: JSON.stringify(workData),
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Work created successfully:', responseData);
+            // Perform any additional actions with the response data if needed
+        } else {
+            const errorData = await response.json();
+            console.error('Failed to create work:', response.status, errorData.message);
+            // Handle specific error messages or statuses as needed
+        }
+    } catch (error) {
+        console.error('Error during the request:', error);
+        // Handle network or other unexpected errors
+    }
+}
