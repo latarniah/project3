@@ -142,6 +142,25 @@ body {
 	font-size: 14px;
 }
 
+.top-nav {
+	overflow: hidden;
+	background-color: black;
+	height: 59px;
+	width: 1440px;
+	color: white;
+		display: flex;
+	justify-content: center;
+	word-spacing: 7px;
+	align-items: center;
+
+  }
+  
+  .top-nav i{
+	color: white;
+	padding-right: 20px;
+  }
+  
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -451,11 +470,13 @@ form {
 
 .modal-txt {
 	color: black;
-	align-items: center;
+	/* align-items: center; */
 	text-decoration: none;
-	padding-bottom: 45px;
+	/* padding-bottom: 45px; */
 	padding-top: 45px;
 	font-weight: normal;
+	margin-left: 215px;
+	display: flex;
 }
 
 
@@ -468,15 +489,15 @@ form {
 	margin-bottom: 20px;
 }
 
-.modal img{
+.modal img {
 	height: 103px;
-	
+
 }
 
 .modal-gallery {
 	display: flex;
 	flex-wrap: wrap;
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 	margin-right: 0;
 	padding-left: 35px;
 	gap: 7px;
@@ -506,7 +527,7 @@ button {
 
 .button-section {
 
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 
@@ -517,10 +538,11 @@ button {
 	background-color: #1D6154;
 	color: white;
 	border-radius: 65px;
-	text-align: center;
+	/* text-align: center; */
 	font-size: 1em;
 	width: 193px;
-	margin-top: 30px;
+	margin-left: 150px;
+	margin-top: 15px;
 
 }
 
@@ -567,11 +589,16 @@ button {
 	position: absolute;
 	top: 0;
 	right: 0;
-	padding: 10px;
-	/* cursor: pointer;
-    color: black; */
+	padding: 5px;
+	cursor: pointer;
+	color: white;
+	background-color: black;
 	width: 17px;
 	height: 17px;
+	align-content: center;
+	border-radius: 5px;
+	margin: 5px;
+	padding-right: 1px;
 }
 
 .img-wrap:hover .trash-icon {

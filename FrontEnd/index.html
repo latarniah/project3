@@ -14,9 +14,11 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+
 </head>
 
 <body>
+	<div class=" hidden top-nav"><i class="fa-regular fa-pen-to-square"></i> Editing Mode </div>
 	<header>
 		<h1>Sophie Bluel <span>Interior Designer</span></h1>
 		<nav>
@@ -47,11 +49,11 @@
 		<section id="portfolio">
 			<div class="edit">
 				<h2>My Projects </h2>
-				<i class="fa-regular fa-pen-to-square"></i>
-				<button class=" bnt btn-edit">Edit</button>
+				<i class="hidden fa-regular fa-pen-to-square"></i>
+				<button class="hidden btn btn-edit">Edit</button>
 			</div>
 
-			<div class="filters">
+			<div class="hidden filters">
 				<button class="filter-button" type="button" data-filter="all">All</button>
 			</div>
 			<div class="gallery">
@@ -118,62 +120,64 @@
 			</form>
 		</section>
 		<section class="modal hidden">
-			<button class="btn-close">⨉</button>
-			<h1 class="modal-txt">Photo Gallery</h1>
-			<div class="flex">
+			<div>
+				<button class="btn-close">⨉</button>
+				<h1 class="modal-txt">Photo Gallery</h1>
 				<div class="modal-gallery">
+					<!-- <button class="pizza">click me</button> -->
 					<div class="img-wrap">
 						<img src=" assets/images/abajour-tahina.png" alt="Tahina Lampshade">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="1"></i>
 					</div>
 					<div class="img-wrap">
 						<img src=" assets/images/appartement-paris-v.png" alt="Paris V Appartment">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="2"></i>
 					</div>
 					<div class="img-wrap">
 						<img src=" assets/images/restaurant-sushisen-londres.png" alt="Sushisen Restaurant - London">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="3"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/la-balisiere.png" alt="La Balisière” Villa – Port-Louis">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="4"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/structures-thermopolis.png" alt="Thermopolis Structures">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="5"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/appartement-paris-x.png" alt="Paris X Appartment">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="6"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/le-coteau-cassis.png" alt="Le Coteau” Pavillon - Cassis">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="7"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/villa-ferneze.png" alt="Ferneze Villa - Elba">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="8"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/appartement-paris-xviii.png" alt="Paris XVIII Appartment">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<a class="trash-icon fa-solid fa-trash-can" data-id="9"></a>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/bar-lullaby-paris.png" alt="Lullaby” Bar - Paris">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="10"></i>
 					</div>
 					<div class="img-wrap">
 						<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-						<i class="trash-icon fa-solid fa-trash-can"></i>
+						<i class="trash-icon fa-solid fa-trash-can" data-id="11"></i>
 					</div>
 				</div>
 				<div class="button-section">
 					<button class="btn">Add a photo</button>
 				</div>
-				<div class="overlay hidden"></div>
+				<!-- <div class="overlay hidden"></div> -->
+			</div>
 		</section>
 
-		
+
 	</main>
 
 	<footer>
