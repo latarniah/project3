@@ -148,18 +148,18 @@ body {
 	height: 59px;
 	width: 1440px;
 	color: white;
-		display: flex;
+	display: flex;
 	justify-content: center;
 	word-spacing: 7px;
 	align-items: center;
 
-  }
-  
-  .top-nav i{
+}
+
+.top-nav i {
 	color: white;
 	padding-right: 20px;
-  }
-  
+}
+
 
 header {
 	display: flex;
@@ -437,7 +437,7 @@ form {
 }
 
 .modal {
-	display: flex;
+	display: block;
 	/* flex-direction: column; */
 	flex-wrap: wrap;
 	gap: 0.4rem;
@@ -455,6 +455,9 @@ form {
 	align-items: center;
 }
 
+.modal .hidden{
+	display: none;
+}
 
 .modal .flex {
 	display: flex;
@@ -470,13 +473,14 @@ form {
 
 .modal-txt {
 	color: black;
-	/* align-items: center; */
+	align-items: center;
 	text-decoration: none;
-	/* padding-bottom: 45px; */
-	padding-top: 45px;
+	padding-bottom: 45px;
+	/* padding-top: 45px; */
 	font-weight: normal;
-	margin-left: 215px;
+	/* margin-left: 215px; */
 	display: flex;
+	margin-top: 75px;
 }
 
 
@@ -497,9 +501,11 @@ form {
 .modal-gallery {
 	display: flex;
 	flex-wrap: wrap;
-	padding-bottom: 30px;
-	margin-right: 0;
+	padding-bottom: 75px;
+	margin-right: 75px;
+	margin-left: 75px;
 	padding-left: 35px;
+
 	gap: 7px;
 	border-bottom: 1px solid #B3B3B3;
 }
@@ -526,8 +532,10 @@ button {
 }
 
 .button-section {
+	display: flex;
+	margin-top: 4ch;
+	justify-content: center;
 
-	margin-top: 10px;
 }
 
 
@@ -541,7 +549,6 @@ button {
 	/* text-align: center; */
 	font-size: 1em;
 	width: 193px;
-	margin-left: 150px;
 	margin-top: 15px;
 
 }
