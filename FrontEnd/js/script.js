@@ -1,7 +1,4 @@
 
-// Create a function in script.js that returns true if the user's token is found in local storage 
-// and false if not. This will be useful to determine if elements on the home page should be shown
-//  or hidden depending on if the user is logged in.
 function isLoggedIn() {
     const token = localStorage.getItem('token');
     return token !== undefined && token !== null;
@@ -16,10 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(isLoggedIn());
 
     if (isLoggedIn()) {
-        // Show black edit bar
-        // Show edit button next to my project
-        // Hide category filters
-
         icon.classList.remove('hidden');
         topNav.classList.remove('hidden');
         filters.classList.remove('hidden');
@@ -59,7 +52,7 @@ function insertJobs(jobs) {
         `;
     }
 }
-//TODO// fetchCategoryMenu
+
 
 fetch('http://localhost:5678/api/categories')
     .then(data => {
@@ -89,7 +82,7 @@ function insertFilterButtons(categories) {
             const categoryName = event.target.value;
 
             console.log(categoryName)
-            //TODO filter job cache with category name
+
             let filteredJobs;
             if (categoryName === 'All') {
                 console.log(jobCache)
@@ -112,6 +105,7 @@ function insertFilterButtons(categories) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.querySelector(".modal");
+    const overlay = document.querySelector(".overlay");
     const closeModalBtn = document.querySelector(".btn-close");
     const modalImage = modal.querySelector("img");
     const galleryImages = document.querySelectorAll(".gallery img");
@@ -121,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     icon.addEventListener("click", () => {
         modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
         modalImage.src = "assets/images/abajour-tahina.png";
         modal.querySelector(".modal-txt").textContent = "Photo Gallery";
     });
@@ -129,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function openModal(imgElement) {
         //TODO insert small gallery cards into
         modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
         modalImage.src = imgElement.src;
         modal.querySelector(".modal-txt").textContent = imgElement.alt;
 
@@ -136,6 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     }
+
+    const closeModal = function () {
+        modal.classList.add("hidden");
+        overlay.classList.add("hidden");
+    };
+    overlay.addEventListener("click", closeModal);
 
     function insertModalGallery(imgWrap) {
         console.log(gallery)
@@ -153,84 +155,102 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Get references to the modal, close button, and other relevant elements
+    // const modal = document.querySelector(".modal");
+    // const closeModalBtn = document.querySelector(".btn-close");
 
-    closeModalBtn.addEventListener("click", () => {
-        modal.classList.add("hidden");
-    });
+    closeModalBtn.addEventListener("click", closeModal);
+
 
     window.addEventListener("click", (e) => {
+
         if (e.target === modal) {
             modal.classList.add("hidden");
         }
     });
 
-    // Optionally, handle modal closing with the "Escape" key
+
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape" && !modal.classList.contains("hidden")) {
             modal.classList.add("hidden");
         }
     });
-});
 
 
-const modalImage = document.querySelectorAll(".img-wrap")
-modalImage.forEach(img => {
 
-    img.addEventListener("click", () => openModal(img));
-});
 
-const trashIcons = document.querySelectorAll('fa-solid fa-trash-can')
-trashIcons.forEach(icon => {
-    icon.addEventListener('click', function (e) {
-        const trashCanElement = e.target;
-        const imageElement = trashCanElement.closest('.img-wrap');
-        imageElement.remove();
+    // const modalImage = document.querySelectorAll(".img-wrap")
+    // modalImage.forEach(img => {
+
+    //     // img.addEventListener("click", () => openModal(img));
+    // });
+
+    // const trashIcons = document.querySelectorAll('fa-solid fa-trash-can')
+    trashIcons.forEach(icon => {
+        icon.addEventListener('click', function (e) {
+            const trashCanElement = e.target;
+            const imageElement = trashCanElement.closest('.img-wrap');
+            imageElement.remove();
+            //TODO use fetch to call BE to delete jobs
+            //TODO update home new jobs are deleted "look for job in cache & delet it, then call function that
+            // displays the jobs on homepage passing the job cache to the job"
+        });
     });
-});
-
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-        modal.classList.add("hidden");
-    }
-});
 
 
 
+    document.addEventListener('DOMContentLoaded', () => {
+        const trashIcons = document.querySelectorAll('.trash-icon');
+
+        trashIcons.forEach(icon => {
+            icon.addEventListener('click', function (e) {
+                const trashCanElement = e.target;
 
 
-const deleteIcons = document.querySelectorAll('.trash-icon');
+                const imageElement = trashCanElement.closest('.img-wrap');
+                if (!imageElement) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-    //    document.querySelector(".pizza").addEventListener('click',function(){console.log('pizza')})
+                const resourceId = trashCanElement.dataset.id;
+                const token = localStorage.getItem('token');
 
-    deleteIcons.forEach(icon => {
-        console.log(icon)
-        icon.addEventListener('click', function ($event) {
-            console.log("delete icon clicked")
-            const trashCanElement = $event.target;
-            const resourceId = trashCanElement.dataset.id;
 
-            const url = `http://localhost:5678/api/works/1${resourceId}`;
+                const url = `http://localhost:5678/api/works/${resourceId}`;
 
-            fetch(url, {
-                method: 'DELETE',
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log(`Resource ${resourceId} deleted successfully`);
-                        this.remove();
-                    } else {
-                        console.error(`Failed to delete resource ${resourceId}`);
-                    }
+
+                fetch(url, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            console.log(`Resource ${resourceId} deleted successfully`);
+
+                            imageElement.remove();
+                        } else {
+                            console.error(`Failed to delete resource ${resourceId}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
         });
     });
 });
 
+// const addAPhoto = document.querySelector("btn");
 
+// addAPhoto.addEventListener("click", async () => {
+//     // A <form> element
+//     const title = document.querySelector("#user-info");
+//     const category = new FormData(userInfo);
 
+//     const response = await fetch("http://localhost:5678/api/works"), {
+//         method: "POST",
+//         body: formData,
+//     });
+// console.log(await response.json());
+// });
 
