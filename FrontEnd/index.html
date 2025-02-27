@@ -25,7 +25,8 @@
 			<ul>
 				<li>projects</li>
 				<li>contact</li>
-				<li><a href="login.html">login</a></li>
+				<li class="login"><a href="login.html">login</a></li>
+				<li class="hidden logout"></a>logout</li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -49,11 +50,11 @@
 		<section id="portfolio">
 			<div class="edit">
 				<h2>My Projects </h2>
-				<i class="hidden icon fa-regular fa-pen-to-square"></i>
-				<button class="hidden btn btn-edit">Edit</button>
+				<div class="hidden btn-edit"><i class=" fa -regular fa-pen-to-square"></i>Edit</div>
+
 			</div>
 
-			<div class="hidden filters">
+			<div class="filters">
 				<button class="filter-button" type="button" data-filter="all">All</button>
 			</div>
 			<div class="gallery">
@@ -173,10 +174,11 @@
 				<div class="button-section">
 					<button class="btn">Add a photo</button>
 				</div>
-				
+
 			</div>
 		</section>
 		<div class="overlay hidden"></div>
+		
 
 	</main>
 

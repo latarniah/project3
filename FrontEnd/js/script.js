@@ -7,19 +7,56 @@ function isLoggedIn() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const topNav = document.querySelector(".top-nav");
-    const icon = document.querySelector(".icon");
     const filters = document.querySelector(".filters");
     const button = document.querySelector(".btn-edit")
+    const login = document.querySelector(".login")
+    const logout = document.querySelector(".logout")
     console.log(isLoggedIn());
 
     if (isLoggedIn()) {
-        icon.classList.remove('hidden');
         topNav.classList.remove('hidden');
-        filters.classList.remove('hidden');
+        filters.classList.add('hidden');
         button.classList.remove('hidden');
+        login.classList.add('hidden');
+        logout.classList.remove('hidden');
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const logout = document.querySelector(".logout");
+    const login = document.querySelector(".login");
+
+    console.log("Logout", logout);
+    
+
+    if (!logout || !login) {
+        console.error("Logout or login button not found.");
+        return;
+    }
+
+    logout.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        console.log("Before Logout - token:", localStorage.getItem("token"));
+
+       
+        localStorage.removeItem("token");
+
+        console.log("After Logout - token:", localStorage.getItem("token"));
+        console.log("User logged out successfully.");
+
+        // Ensure login button appears and logout disappears
+        login.classList.remove("hidden"); // Show login button
+        login.style.display = "block"; // Ensure it's not hidden
+        logout.classList.add("hidden"); // Hide logout button
+        logout.style.display = "none"; // Extra safety
+
+        
+       
+            window.location.href = "./"; 
+        
+    });
+});
 
 
 
@@ -111,9 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryImages = document.querySelectorAll(".gallery img");
     const trashIcons = document.querySelectorAll(".trash-icon");
 
-    const icon = document.querySelector(".icon");
+    const button = document.querySelector(".btn-edit")
 
-    icon.addEventListener("click", () => {
+    button.addEventListener("click", () => {
         modal.classList.remove("hidden");
         overlay.classList.remove("hidden");
         modalImage.src = "assets/images/abajour-tahina.png";
@@ -155,9 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Get references to the modal, close button, and other relevant elements
-    // const modal = document.querySelector(".modal");
-    // const closeModalBtn = document.querySelector(".btn-close");
 
     closeModalBtn.addEventListener("click", closeModal);
 
@@ -178,19 +212,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-    // const modalImage = document.querySelectorAll(".img-wrap")
-    // modalImage.forEach(img => {
-
-    //     // img.addEventListener("click", () => openModal(img));
-    // });
-
-    // const trashIcons = document.querySelectorAll('fa-solid fa-trash-can')
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function (e) {
             const trashCanElement = e.target;
             const imageElement = trashCanElement.closest('.img-wrap');
             imageElement.remove();
+
+            async function deleteImage(imageId) {
+                try {
+                    const token = localStorage.getItem('authToken');
+                    const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (response.ok) {
+                        console.log(`Image with ID ${imageId} deleted successfully.`);
+
+                        document.getElementById(`image-${imageId}`)?.remove();
+                        document.getElementById(`modal-image-${imageId}`)?.remove();
+
+
+                        refreshGallery();
+                    } else {
+                        console.error('Failed to delete image:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            function attachDeleteEventListeners() {
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const imageId = this.dataset.id;
+                        deleteImage(imageId);
+                    });
+                });
+            }
+
+
+            fetch('http://localhost:5678/api/works')
+                .then(data => {
+                    return data.json();
+                })
+                .then(jobs => {
+                    jobCache = jobs
+                    insertJobs(jobs)
+                });
+
+
+
+
+
+
             //TODO use fetch to call BE to delete jobs
             //TODO update home new jobs are deleted "look for job in cache & delet it, then call function that
             // displays the jobs on homepage passing the job cache to the job"
