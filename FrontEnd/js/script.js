@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const login = document.querySelector(".login");
 
     console.log("Logout", logout);
-    
+
 
     if (!logout || !login) {
         console.error("Logout or login button not found.");
@@ -39,22 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("Before Logout - token:", localStorage.getItem("token"));
 
-       
+
         localStorage.removeItem("token");
 
         console.log("After Logout - token:", localStorage.getItem("token"));
         console.log("User logged out successfully.");
 
-        // Ensure login button appears and logout disappears
-        login.classList.remove("hidden"); // Show login button
-        login.style.display = "block"; // Ensure it's not hidden
-        logout.classList.add("hidden"); // Hide logout button
-        logout.style.display = "none"; // Extra safety
 
-        
-       
-            window.location.href = "./"; 
-        
+        login.classList.remove("hidden");
+        login.style.display = "block";
+        logout.classList.add("hidden");
+        logout.style.display = "none";
+
+
+
+        window.location.href = "./";
+
     });
 });
 
@@ -208,20 +208,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === "Escape" && !modal.classList.contains("hidden")) {
             modal.classList.add("hidden");
         }
-    });
+    });  
 
-
+    
 
     trashIcons.forEach(icon => {
         icon.addEventListener('click', function (e) {
             const trashCanElement = e.target;
             const imageElement = trashCanElement.closest('.img-wrap');
+            const jobId = trashCanElement.dataset.id;
             imageElement.remove();
 
-            async function deleteImage(imageId) {
+            async function deleteImage(jobId) {
                 try {
-                    const token = localStorage.getItem('authToken');
-                    const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch(`http://localhost:5678/api/works/${jobId}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -230,10 +231,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     if (response.ok) {
-                        console.log(`Image with ID ${imageId} deleted successfully.`);
+                        console.log(`Image with ID ${jobId} deleted successfully.`);
 
-                        document.getElementById(`image-${imageId}`)?.remove();
-                        document.getElementById(`modal-image-${imageId}`)?.remove();
+                        document.getElementById(`image-${jobId}`)?.remove();
+                        document.getElementById(`modal-image-${jobId}`)?.remove();
 
 
                         refreshGallery();
@@ -255,23 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            fetch('http://localhost:5678/api/works')
-                .then(data => {
-                    return data.json();
-                })
-                .then(jobs => {
-                    jobCache = jobs
-                    insertJobs(jobs)
-                });
 
-
-
-
-
-
-            //TODO use fetch to call BE to delete jobs
-            //TODO update home new jobs are deleted "look for job in cache & delet it, then call function that
-            // displays the jobs on homepage passing the job cache to the job"
+            deleteImage(jobId)
         });
     });
 
@@ -318,17 +304,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// const addAPhoto = document.querySelector("btn");
+document.addEventListener('DOMContentLoaded', function() {
+    const openPhotoFormButton = document.getElementById('openPhotoForm');
+    const photoForm = document.getElementById('photoForm');
+    const backToGalleryButton = document.getElementById('backToGallery');
+    const modalGallery = document.querySelector('.modal-gallery');
+    const modalText = document.querySelector('.modal-txt');
+    const addPhotoButton = document.getElementById('openPhotoForm');
 
-// addAPhoto.addEventListener("click", async () => {
-//     // A <form> element
-//     const title = document.querySelector("#user-info");
-//     const category = new FormData(userInfo);
+    openPhotoFormButton.addEventListener('click', function() {
+        modalGallery.style.display = 'none';
+        modalText.style.display = 'none';
+        addPhotoButton.style.display = 'none';
+        photoForm.style.display = 'flex';
+    });
 
-//     const response = await fetch("http://localhost:5678/api/works"), {
-//         method: "POST",
-//         body: formData,
-//     });
-// console.log(await response.json());
-// });
+    backToGalleryButton.addEventListener('click', function() {
+        photoForm.style.display = 'none';
+        modalGallery.style.display = 'flex';
+        modalText.style.display = 'block';
+        addPhotoButton.style.display = 'block';
+    });
 
+    const photoUpload = document.getElementById('photoUpload');
+    const confirmButton = document.getElementById('confirmButton');
+
+    photoUpload.addEventListener('change', function() {
+        if (photoUpload.files.length > 0) {
+            confirmButton.disabled = false;
+        } else {
+            confirmButton.disabled = true;
+        }
+    });
+
+    confirmButton.addEventListener('click', function() {
+        // Handle form submission
+        alert('Photo added!');
+        photoForm.style.display = 'none';
+        modalGallery.style.display = 'flex';
+        modalText.style.display = 'block';
+        addPhotoButton.style.display = 'block';
+    });
+});

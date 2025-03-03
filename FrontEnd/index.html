@@ -172,8 +172,36 @@
 					</div>
 				</div>
 				<div class="button-section">
-					<button class="btn">Add a photo</button>
+					<button id="openPhotoForm" class="btn">Add a photo</button>
 				</div>
+				
+				<!-- Add Photo Form (Initially Hidden) -->
+				<div id="photoForm" class="hidden">
+					<span id="backToGallery" class="backButton">←</span>
+					<h2>Add photo</h2>
+				
+					<!-- Upload Section -->
+					<label for="photoUpload" class="photo-upload">
+						<div class="upload-box">
+							<i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+							<p>+ Add photo</p>
+							<p class="file-info">jpg, png max 4MB</p>
+						</div>
+						<input type="file" id="photoUpload" accept="image/png, image/jpeg" hidden>
+					</label>
+				
+					<!-- Input Fields -->
+					<input type="text" id="title" placeholder="Title">
+					<select id="category">
+						<option value="">Select a Category</option>
+						<option value="nature">Nature</option>
+						<option value="people">People</option>
+						<option value="art">Art</option>
+					</select>
+				
+					<button id="confirmButton" disabled>Confirm</button>
+				</div>
+				
 
 			</div>
 		</section>
